@@ -1,8 +1,21 @@
 const jwt = require('jsonwebtoken');
 
 const authorize = async (req, res, next) => {
+    const auth = req.headers.authorization;
 
-    const token = req.headers.authorization.split(' ')[1];
+    let token;
+    if (auth) {
+        token = auth.split(' ')[1];
+    } else {
+        return res.status(400).json({
+            status: 'fail',
+            data: {
+                message: `Bad Request`
+            }
+        })
+
+    }
+
     try {
         const isVerified = await jwt.verify(token, process.env.MY_SUPER_SECRET_KEY);
     } catch (err) {

@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post('/', authorize, addTodo)
 
-router.get('/', authorize, getTodo)
+router.get('/:userId', authorize, getTodo)
 
 router.delete('/', authorize, deleteTodo)
 

@@ -2,7 +2,14 @@
 const TODO_MODEL = require('./../model/notes-model');
 
 const getTodo = async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.params;
+
+    if (!userId) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Invalid user'
+        })
+    }
     let todo;
     try {
         todo = await TODO_MODEL.find({ userId: userId });
