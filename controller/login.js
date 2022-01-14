@@ -16,7 +16,7 @@ const login = async (req, res, next) => {
 
     let user;
     try {
-        user = await USER_MODEL.findOne({ email });
+        user = await USER_MODEL.findOne({ email: email });
     } catch (err) {
         console.log(err);
     }
