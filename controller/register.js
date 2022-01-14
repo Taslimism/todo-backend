@@ -14,7 +14,8 @@ const register = async (req, res) => {
     }
 
     try {
-        const user = USER_MODEL.find({ email: email });
+        const user = await USER_MODEL.find({ email: email });
+        console.log(user);
         if (user.length !== 0) {
             return res.status(200).json({
                 status: 'success',
