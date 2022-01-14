@@ -15,7 +15,7 @@ const register = async (req, res) => {
 
     try {
         const user = USER_MODEL.find({ email: email });
-        if (user.length === 0) {
+        if (user.length !== 0) {
             return res.status(200).json({
                 status: 'success',
                 data: {
@@ -29,7 +29,7 @@ const register = async (req, res) => {
         return res.status(500).json({
             status: 'failure',
             data: {
-                message: `An unknown error occured`
+                message: `An unknown error occured in DB`
             }
         })
 
@@ -42,7 +42,7 @@ const register = async (req, res) => {
         return res.status(500).json({
             status: 'fail',
             data: {
-                message: 'An unknown error occured'
+                message: 'An unknown error occured while hashing'
             }
         })
     }
@@ -55,7 +55,7 @@ const register = async (req, res) => {
         return res.status(500).json({
             status: 'fail',
             data: {
-                message: 'An unknown error occured'
+                message: 'An unknown error occured while tokenising'
             }
         })
     }
@@ -73,7 +73,7 @@ const register = async (req, res) => {
         return res.status(500).json({
             status: 'fail',
             data: {
-                message: 'An unknown error occured'
+                message: 'An unknown error occured while saving to DB'
             }
         })
     }
